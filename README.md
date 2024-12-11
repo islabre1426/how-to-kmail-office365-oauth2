@@ -1,22 +1,24 @@
-# How to config Kmail to use office 365 which forces OAUTH2
+# Workaround for KMail to use Office 365
+(Tested on KMail 24.08.3)
 
-***This is only a work around which I don't even know why it works, but it works***
+For unknown reason, KMail cannot configure Office 365 automatically.
+IMAP option does not work, [Exchange one has a bug which is not yet resolved](https://bugs.kde.org/show_bug.cgi?id=409183).
 
-***If there is any possiblity, plz stay against these non-standard proprietary protocols. However, I admit sometimes life sucks and leaves no choice***
+Nevertheless, Exchange is the only thing that works.
 
-(I only tested KMail 5.19.2 (21.12.2))
-
-- Create an empty identity for this, don't add email address or anything
-- Open Kmail configure - Accounts - Receiving
-- Add custorm account - EWS
-- Input EMail, unclick domain if your office 365 uses default domain (outlook.office365.com)
-- Input Username and Password (yes it will fail because OAuth2 is forced)
-- Uncheck Server Autodiscovery and manually input EWS URL (if your provider doesn't change it, the default is https://outlook.office365.com/EWS/Exchange.asmx)
-- Press OK (it will ask you it is not working and whether you want to save it, click yes)
-- Reopen it to modify it
-- Check OAuth2 (Office 365)
-- Click Try connect, the OAuth2 prompt will show up
-- Finish it and the incoming account is set
+At the mean time, try the following workaround:
+- Settings > Configure KMail.. > Accounts > Identities > Add..: Fill needed information (Name and Email Address) > OK.
+- In the same window, go to Receiving > Add... > Custom Account... > Choose Microsoft Exchange Server (EWS).
+- Fill Account Name and Email, for domain use outlook.office365.com. Also fill Username and Password (it will fail since OAuth2 is forced).
+- Uncheck Server Autodiscovery and manually input EWS URL (if your provider doesn't change it, the default is https://outlook.office365.com/EWS/Exchange.asmx).
+- Click OK (it will say it is not working and whether you want to save it, click OK and Save respectively).
+- Reopen the created account to modify it.
+- Check OAuth2 (Office 365) > Click OK. The OAuth2 prompt will show up.
+- Finish it and the incoming account is set.
 - Go to Sending and click Add...
-- Chosse EWS, the account you just verified will show up, chose it and outgoing account is set
-- Now edit the empty identity you added at beginning, and everything is done.
+- Choose EWS, the account you just verified will show up, choose it and outgoing account is set.
+- Everything should now work.
+
+Credit to:
+- [KDE's Userbase](https://userbase.kde.org/Kmail/Configuring_Kmail/Accounts/Office_365) for documenting.
+- [gzqx](https://github.com/gzqx/how-to-kmail-office365-oauth2) for original workaround.
